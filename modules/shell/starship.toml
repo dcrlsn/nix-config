@@ -1,0 +1,226 @@
+format = """
+$os\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+[](fg:color10 bg:color9)\
+[](fg:color9 bg:dark_bg)\
+$terraform\
+$nodejs\
+$rust\
+$python\
+$golang\
+[](fg:dark_bg bg:darker_bg)\
+$battery\
+[ ](fg:darker_bg)\
+$fill\
+$memory_usage\
+[](fg:darker_bg bg:#1a1b26)\
+$time\
+$line_break\
+$cmd_duration\
+$character"""
+
+
+palette = "tokyo"
+
+[palettes.tokyo]
+foreground = "#e3e5e5"
+background = "#769ff0"
+dark_bg = "#212736"
+darker_bg = "#1d2230"
+text = "#090c0c"
+cursor = "#769ff0"
+color1 = "#a3aed2"
+color2 = "#769ff0"
+color3 = "#394260"
+color4 = "#090c0c"
+color5 = "#e3e5e5"
+color6 = "#a0a9cb"
+color7 = "#f7768e"
+color8 = "#e0af68"
+color9 = "#bb9af7"
+color10 = "#9ece6a"
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[character]
+success_symbol = "[[](fg:#1a1b26 bg:background)[ ](bold fg:background bg:#1a1b26)](fg:background)"
+error_symbol = "[[](fg:#1a1b26 bg:color7)[ !](bold fg:color7 bg:#1a1b26)](fg:color7)"
+vicmd_symbol = "[[](fg:#1a1b26 bg:color8) [ :](bold fg:color8 bg:#1a1b26)](fg:color8)"
+format = "$symbol "
+
+[fill]
+symbol = ' '
+
+[line_break]
+disabled = false
+
+[os]
+disabled = false
+style = "bg:color1 fg:text"
+format = "[ $symbol ]($style)"
+
+[directory]
+style = "fg:darker_bg bg:background"
+read_only = " 󰉐 "
+read_only_style = "bg:background fg:color8"
+format = "[[](bg:background fg:color1) $read_only$path [](fg:background bg:color10)]($style)"
+truncation_length = 3
+truncation_symbol = " /"
+
+[directory.substitutions]
+"Documents" = " 󱧶 "
+"Music" = " 󱍙 "
+"Movies" = " 󱞊 "
+"Pictures" = " 󰉏 "
+"Downloads" = " 󰉍 "
+"Sources" = "  "
+"~" = "  "
+"/" = "  "
+
+[git_branch]
+symbol = ""
+style = "fg:darker_bg bg:color10"
+format = '[ $symbol $branch ]($style)'
+
+[git_state]
+# disabled = true
+style = "fg:darker_bg bg:color10"
+rebase = "󱓍 "
+merge = " "
+revert = "󱞴 "
+cherry_pick = " "
+bisect = "󰃻 "
+format = '[$state($progress_current/$progress_total) ]($style)'
+
+[git_status]
+style = "fg:darker_bg bg:color10"
+stashed = "  ${count}"
+ahead = "  ${count}"
+behind = "  ${count}"
+diverged = " 󰦻 ${ahead_count} ${behind_count}"
+conflicted = " ${count}"
+deleted = "  ${count}"
+renamed = "  ${count}"
+modified = "  ${count}"
+staged = "  ${count}"
+untracked = "  ${count}"
+format = '[($stashed$staged$modified$renamed$untracked$deleted$conflicted$ahead_behind )]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:dark_bg"
+format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:dark_bg"
+format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:dark_bg"
+format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
+
+[terraform]
+symbol = "󱁢 "
+style = "bg:dark_bg"
+format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
+
+[python]
+# disabled = true
+symbol = ""
+style = "bg:dark_bg"
+pyenv_version_name = true
+pyenv_prefix = " "
+python_binary = "3"
+# scan_for_pyfiles = true
+format = '[ $symbol $pyenv_prefix$version(\($virtualenv\)) ]($style)'
+
+[kubernetes]
+disabled = false
+symbol = "☸︎"
+style = "bg:color9 fg:dark_bg"
+format = '[ $symbol $context(\($namespace\)) ]($style)'
+
+[time]
+disabled = false
+time_format = "%T" # Hour:Minute:Second Format
+style = "bg:darker_bg"
+format = '[[ $time   ](fg:color6 bg:darker_bg)]($style)'
+
+[memory_usage]
+disabled = false
+symbol = "󰍛"
+style = "bg:#1a1b26 fg:color8"
+threshold = 75
+format = '[[ ($swap:)$ram$symbol ](fg:color8)]($style)'
+
+[battery]
+# disabled = true
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰁻"
+unknown_symbol = "󰂑"
+empty_symbol = "󰂃"
+format = "[ $percentage$symbol ]($style)"
+[[battery.display]]
+threshold = 10
+style = "bold bg:#darker_bg fg:#color7"
+[[battery.display]]
+threshold = 20
+style = "bg:#darker_bg fg:#color7"
+
+[cmd_duration]
+# disabled = true
+style = "bg:darker_bg fg:color9"
+min_time = 2_000
+show_milliseconds = true
+show_notifications = false
+min_time_to_notify = 60_000
+format = "[ $duration  ]($style)"
