@@ -41,8 +41,6 @@
      displaylink
      discord
      betterdiscordctl
-     gcc
-     unzip
     ];
   };
 

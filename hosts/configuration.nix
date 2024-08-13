@@ -95,9 +95,7 @@ in
       VISUAL = "${vars.editor}";
     };
     systemPackages = with pkgs; [
-      #Editors
-      neovim # idk dude
-      # Terminal
+      #Terminal
       terminal # Terminal Emulator
       btop # Resource Manager
       coreutils # GNU Utilities
@@ -125,10 +123,14 @@ in
       p7zip # Zip Encryption
       rsync # Syncer - $ rsync -r dir1/ dir2/
       zip # Zip
+      unzip # unzip
 
       # Work
       slack
       teams-for-linux
+
+      # Other
+      gcc
 
       # Other Packages Found @
       # - ./<host>/default.nix
