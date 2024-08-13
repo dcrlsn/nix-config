@@ -42,6 +42,7 @@
      discord
      betterdiscordctl
      gcc
+     unzip
     ];
   };
 

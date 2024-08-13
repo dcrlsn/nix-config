@@ -10,7 +10,7 @@
 
 {
   description = "Nix, NixOS and Nix Darwin System Flake Configuration";
-  submodules = true;
+
   inputs =
     {
       nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05"; # Stable Nix Packages
