@@ -2,11 +2,13 @@
 #  Terminal Prompt
 #
 
-{ pkgs, ... }:
+{ vars, pkgs, ... }:
 
 {
-  programs.starship = {
-    enable = true;
-    settings = pkgs.lib.importTOML ./starship.toml;
+  home-manager.users.${vars.user} = {
+    programs.starship = {
+      enable = true;
+      settings = pkgs.lib.importTOML ./starship.toml;
+    };
   };
 }
