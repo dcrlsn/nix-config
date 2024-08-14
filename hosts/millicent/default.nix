@@ -38,7 +38,12 @@
 
   environment = {
    systemPackages = with pkgs; [
+     # Framework
+     framework-tool
+     fw-ectool
+     # Dock
      displaylink
+     # Chat... thisll probably move
      discord
      betterdiscordctl
     ];

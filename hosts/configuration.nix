@@ -131,6 +131,8 @@ in
 
       # Other
       gcc
+      cmake
+      ripgrep
 
       # Other Packages Found @
       # - ./<host>/default.nix
