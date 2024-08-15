@@ -1,17 +1,12 @@
 #
-#  Specific system configuration settings for xps
+#  Specific system configuration settings for framework 13
 #
 #  flake.nix
 #   ├─ ./hosts
 #   │   ├─ default.nix
-#   │   └─ ./xps
+#   │   └─ ./millicent
 #   │        ├─ default.nix *
 #   │        └─ hardware-configuration.nix
-#   └─ ./modules
-#       └─ ./desktops
-#           └─ ./virtualisation
-#               └─ docker.nix
-#
 
 { pkgs, lib, ... }:
 
