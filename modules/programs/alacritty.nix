@@ -15,6 +15,9 @@
             bold = { style = "Bold"; };
             size = 6;
           };
+          scrolling = {
+            history = 0;
+          };
         };
       };
     };

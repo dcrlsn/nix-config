@@ -41,6 +41,10 @@
      # Chat... thisll probably move
      discord
      betterdiscordctl
+     # 3D
+     orca-slicer
+     # Network Displays
+     gnome-network-displays
     ];
   };
 

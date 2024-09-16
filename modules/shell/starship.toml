@@ -11,6 +11,7 @@ $nodejs\
 $rust\
 $python\
 $golang\
+$aws_check\
 [](fg:dark_bg bg:darker_bg)\
 $battery\
 [ ](fg:darker_bg)\
@@ -159,6 +160,18 @@ format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
 
 [rust]
 symbol = ""
+style = "bg:dark_bg"
+format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
+
+[custom.aws_check]
+command = 'aws --version'
+when = 'aws --version > /dev/null 2>&1'
+shell = ["zsh", "-c"]
+format = 'AWS CLI Available'
+disabled = false
+
+[aws]
+symbol="aws"
 style = "bg:dark_bg"
 format = '[[ $symbol ($version) ](fg:color2 bg:dark_bg)]($style)'
 

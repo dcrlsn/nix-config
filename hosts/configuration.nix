@@ -97,6 +97,7 @@ in
     systemPackages = with pkgs; [
       #Terminal
       terminal # Terminal Emulator
+      xclip # Terminal Clipboard
       btop # Resource Manager
       coreutils # GNU Utilities
       git # Version Control
