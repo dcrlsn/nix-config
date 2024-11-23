@@ -40,6 +40,8 @@
      orca-slicer
      # Network Displays
      gnome-network-displays
+     # Games
+     steam
     ];
   };
 
