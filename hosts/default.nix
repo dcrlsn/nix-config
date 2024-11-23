@@ -27,7 +27,25 @@ let
   lib = nixpkgs.lib;
 in
 {
-  # Desktop Profile
+  # Desktop Profiles
+  marika = lib.nixosSystem {
+    inherit system;
+    specialArgs = {
+      inherit inputs system stable vars;
+      host = {
+        hostName = "marika";
+      };
+    };
+    modules = [
+      ./marika
+      ./configuration.nix
+      home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+    ];
+  };
   millicent = lib.nixosSystem {
     inherit system;
     specialArgs = {
@@ -39,7 +57,6 @@ in
     modules = [
       ./millicent
       ./configuration.nix
-
       home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
@@ -47,4 +64,5 @@ in
       }
     ];
   };
+
 }

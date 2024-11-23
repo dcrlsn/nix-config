@@ -13,7 +13,7 @@
           font = {
             normal.family = "FiraCode Nerd Font";
             bold = { style = "Bold"; };
-            size = 6;
+            size = 10;
           };
           scrolling = {
             history = 0;
