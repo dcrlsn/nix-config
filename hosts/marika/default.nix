@@ -41,9 +41,9 @@
      # Network Displays
      gnome-network-displays
      # Games
-     steam
     ];
   };
+  programs.steam.enable = true;
 
   # flatpak = {
   #   extraPackages = [
