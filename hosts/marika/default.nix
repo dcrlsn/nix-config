@@ -20,8 +20,11 @@
   boot = {
     consoleLogLevel = 3;
     loader = {
-      systemd-boot = {
+      grub = {
         enable = true;
+        useOSProber = true;
+        devices = [ "nodev" ];
+        efiSupport = true;
         configurationLimit = 5;
       };
       efi = {
