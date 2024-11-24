@@ -59,9 +59,8 @@
         variant = "";
       };
       videoDrivers = [ "nvidia"];
-      desktopManager.plasma6.enable = true;
     };
-    
+    desktopManager.plasma6.enable = true;
     displayManager = {
       defaultSession = "plasma";
     };
