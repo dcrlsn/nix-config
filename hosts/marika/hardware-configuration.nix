@@ -45,7 +45,7 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
     };
 

@@ -82,7 +82,7 @@ in
     font-awesome # Icons
     corefonts # MS
     noto-fonts # Google + Unicode
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     (nerdfonts.override {
       fonts = [
@@ -137,6 +137,7 @@ in
       gcc
       cmake
       ripgrep
+      vscode
 
       # Other Packages Found @
       # - ./<host>/default.nix
@@ -153,8 +154,6 @@ in
   programs = {
       dconf.enable = true;
   };
-
-  sound.enable = true;
 
   hardware ={
     pulseaudio.enable = false;
@@ -198,12 +197,12 @@ in
   nixpkgs.config.allowUnfree = true;
 
   system = {
-    stateVersion = "24.05";
+    stateVersion = "24.11";
   };
 
   home-manager.users.${vars.user} = {
     home = {
-      stateVersion = "24.05";
+      stateVersion = "24.11";
     };
     programs = {
       home-manager.enable = true;

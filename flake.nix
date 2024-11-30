@@ -13,13 +13,13 @@
 
   inputs =
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05"; # Stable Nix Packages
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11"; # Stable Nix Packages
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable"; # Unstable Nix Packages
       nixos-hardware.url = "github:nixos/nixos-hardware/master"; # Hardware Specific Configurations
 
       # User Environment Manager
       home-manager = {
-        url = "github:nix-community/home-manager/release-24.05";
+        url = "github:nix-community/home-manager/release-24.11";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 

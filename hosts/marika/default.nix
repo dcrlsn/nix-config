@@ -35,15 +35,15 @@
   };
 
   environment = {
-   systemPackages = with pkgs; [
-     # Chat... thisll probably move
-     discord
-     betterdiscordctl
-     # 3D
-     orca-slicer
-     # Network Displays
-     gnome-network-displays
-     # Games
+    systemPackages = with pkgs; [
+      # Chat... thisll probably move
+      discord
+      betterdiscordctl
+      # 3D
+      #orca-slicer
+      # Network Displays
+      gnome-network-displays
+      # Games
     ];
   };
   programs.steam.enable = true;
