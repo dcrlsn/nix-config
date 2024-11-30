@@ -32,19 +32,19 @@
   };
 
   environment = {
-   systemPackages = with pkgs; [
-     # Framework
-     framework-tool
-     fw-ectool
-     # Dock
-     displaylink
-     # Chat... thisll probably move
-     discord
-     betterdiscordctl
-     # 3D
-     orca-slicer
-     # Network Displays
-     gnome-network-displays
+    systemPackages = with pkgs; [
+      # Framework
+      framework-tool
+      fw-ectool
+      # Dock
+      displaylink
+      # Chat... thisll probably move
+      discord
+      betterdiscordctl
+      # 3D
+      #orca-slicer
+      # Network Displays
+      gnome-network-displays
     ];
   };
 
