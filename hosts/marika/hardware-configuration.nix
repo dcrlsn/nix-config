@@ -19,9 +19,7 @@
     { device = "/dev/disk/by-uuid/ef019647-f48a-48c0-9d3a-51be07116701";
       fsType = "ext4";
     };
-
-  boot.initrd.luks.devices."luks-f4059849-594c-419d-92db-1a7b49c6325f".device = "/dev/disk/by-uuid/f4059849-594c-419d-92db-1a7b49c6325f";
-
+    
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/34A7-BDB3";
       fsType = "vfat";
@@ -57,7 +55,7 @@
       powerManagement.finegrained = false;
       open = true;
       nvidiaSettings = true;
-      package = unstable.linuxPackages.nvidiaPackages.stable;
+      package = unstable.linuxPackages.nvidiaPackages.latest;
     };
   };
 }

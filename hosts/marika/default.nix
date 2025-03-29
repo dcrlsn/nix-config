@@ -13,9 +13,11 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/desktops/virtualization/docker.nix
   ] ++
-  (import ../../modules/desktops/virtualization);
+  (
+    import ../../modules/desktops/virtualization ++
+    import ../../modules/gaming
+  );
 
   boot = {
     consoleLogLevel = 3;
@@ -46,8 +48,6 @@
       # Games
     ];
   };
-  programs.steam.enable = true;
-
   # flatpak = {
   #   extraPackages = [
   #

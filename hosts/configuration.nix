@@ -114,6 +114,7 @@ in
       usbutils # Manage USB
       wget # Retriever
       xdg-utils # Environment integration
+      neofetch # Just cause
 
       # Video/Audio
       vlc # Media Player
