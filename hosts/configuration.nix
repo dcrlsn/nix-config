@@ -22,7 +22,7 @@
 #           └─ default.nix
 #
 
-{ lib, config, pkgs, stable, inputs, vars, ... }:
+{ lib, config, pkgs, unstable, inputs, vars, ... }:
 
 let
   terminal = pkgs.${vars.terminal};
@@ -46,7 +46,7 @@ in
     extraGroups = [ "networkmanager" "wheel" ];
     openssh = {
       authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKvhXeFBArjo3LDrQGLILbPB0pSYbEIKSFk3/ayvxl99 marika"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICUa5rnDcmz/xcs+qDtQtStKJjJ0/Tf9zRcXC3q3cT0t marika"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIES+FenVoKlLV5YsL9yH0qTKWjavr55Au/PlAYyGonSG ranni"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb7teK5NPq1RVqm/ItSxYIiQsXUkSbJA/u1FDXEVLmE millicent"
       ];

@@ -19,7 +19,7 @@ let
     config.allowUnfree = true;
   };
 
-  stable = import nixpkgs-unstable {
+  unstable = import nixpkgs-unstable {
     inherit system;
     config.allowUnfree = true;
   };
@@ -31,7 +31,7 @@ in
   marika = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system stable vars;
+      inherit inputs system unstable vars;
       host = {
         hostName = "marika";
       };
@@ -49,7 +49,7 @@ in
   millicent = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system stable vars;
+      inherit inputs system unstable vars;
       host = {
         hostName = "millicent";
       };
