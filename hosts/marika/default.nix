@@ -8,7 +8,7 @@
 #   │        ├─ default.nix *
 #   │        └─ hardware-configuration.nix
 
-{ pkgs, lib, ... }:
+{ pkgs, lib, unstable, ... }:
 
 {
   imports = [
@@ -42,11 +42,16 @@
       discord
       betterdiscordctl
       # 3D
-      #orca-slicer
       # Network Displays
       gnome-network-displays
       # Games
-    ];
+    ] ++
+    (with unstable; [
+      # Apps
+      orca-slicer
+      # firefox # Browser
+      # image-roll # Image Viewer
+    ]);
   };
   # flatpak = {
   #   extraPackages = [
