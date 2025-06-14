@@ -41,6 +41,8 @@
       # Chat... thisll probably move
       discord
       betterdiscordctl
+      # Media
+      spotify
       # 3D
       # Network Displays
       gnome-network-displays

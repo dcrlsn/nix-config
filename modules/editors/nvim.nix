@@ -9,6 +9,8 @@ in
       go
       nodejs
       python3
+      rustc
+      cargo
     ];
   };
   programs.neovim = {
