@@ -42,7 +42,6 @@
       betterdiscordctl
       # Media
       spotify
-      # 3D
       # Network Displays
       gnome-network-displays
       # Games
@@ -51,7 +50,6 @@
     ] ++
     (with unstable; [
       # Apps
-      orca-slicer
       # firefox # Browser
       # image-roll # Image Viewer
     ]);

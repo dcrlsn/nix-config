@@ -12,4 +12,5 @@
 
 [
   ./alacritty.nix
+  ./orca-slicer.nix
 ]

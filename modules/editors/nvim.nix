@@ -11,18 +11,26 @@ in
       python3
       rustc
       cargo
+      git
+      gcc
+      gnumake
+      unzip
+      curl
+      ripgrep
+      fd
     ];
   };
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
-    configure = {
-      customRC = ''
-        luafile ${./nvim/init.lua}
-      '';
+    defaultEditor = true;
+  };
+  home-manager.users.${vars.user} = {
+    xdg.configFile."nvim" = {
+      source = ./nvim;
+      recursive = true;
     };
   };
-  home-manager.users.${vars.user} = {};
 }
 
