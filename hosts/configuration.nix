@@ -46,7 +46,7 @@ in
     extraGroups = [ "networkmanager" "wheel" ];
     openssh = {
       authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICUa5rnDcmz/xcs+qDtQtStKJjJ0/Tf9zRcXC3q3cT0t marika"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBy0Ayh+LE/JgCOREmmbaurPg00u1UtbuReYLqVix2MG marika"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIES+FenVoKlLV5YsL9yH0qTKWjavr55Au/PlAYyGonSG ranni"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIb7teK5NPq1RVqm/ItSxYIiQsXUkSbJA/u1FDXEVLmE millicent"
       ];
@@ -83,12 +83,8 @@ in
     corefonts # MS
     noto-fonts # Google + Unicode
     noto-fonts-cjk-sans
-    noto-fonts-emoji
-    (nerdfonts.override {
-      fonts = [
-        "FiraCode"
-      ];
-    })
+    noto-fonts-color-emoji
+    nerd-fonts.fira-code
   ];
 
   environment = {
@@ -104,6 +100,7 @@ in
       btop # Resource Manager
       coreutils # GNU Utilities
       git # Version Control
+      gh # GitHub CLI
       gvfs # Samba
       killall # Process Killer
       lshw # Hardware Config
@@ -114,7 +111,7 @@ in
       usbutils # Manage USB
       wget # Retriever
       xdg-utils # Environment integration
-      neofetch # Just cause
+      fastfetch # Just cause
 
       # Video/Audio
       vlc # Media Player
@@ -139,6 +136,7 @@ in
       cmake
       ripgrep
       vscode
+      nixpkgs-fmt
 
       # Other Packages Found @
       # - ./<host>/default.nix
@@ -157,7 +155,6 @@ in
   };
 
   hardware ={
-    pulseaudio.enable = false;
     bluetooth.enable = true;
   };
   services = {
@@ -195,15 +192,17 @@ in
       keep-derivations      = true
     '';
   };
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+  };
 
   system = {
-    stateVersion = "24.11";
+    stateVersion = "25.11";
   };
 
   home-manager.users.${vars.user} = {
     home = {
-      stateVersion = "24.11";
+      stateVersion = "25.11";
     };
     programs = {
       home-manager.enable = true;

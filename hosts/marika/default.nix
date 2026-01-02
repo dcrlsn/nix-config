@@ -27,7 +27,6 @@
         useOSProber = true;
         devices = [ "nodev" ];
         efiSupport = true;
-        configurationLimit = 5;
       };
       efi = {
         canTouchEfiVariables = true;
@@ -47,6 +46,8 @@
       # Network Displays
       gnome-network-displays
       # Games
+      # Other
+      flatpak
     ] ++
     (with unstable; [
       # Apps
@@ -55,11 +56,7 @@
       # image-roll # Image Viewer
     ]);
   };
-  # flatpak = {
-  #   extraPackages = [
-  #
-  #   ];
-  # };
+
 
   services = {
     xserver = {

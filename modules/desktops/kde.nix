@@ -37,13 +37,7 @@ with lib;
       systemPackages = with pkgs.libsForQt5; [
         bismuth # Dynamic Tiling
         packagekit-qt # Package Updater
-	plasma-thunderbolt
-      ];
-      plasma5.excludePackages = with pkgs.libsForQt5; [
-        elisa
-        khelpcenter
-        konsole
-        oxygen
+	      plasma-thunderbolt
       ];
     };
 
