@@ -1,5 +1,6 @@
 format = """
 $os\
+$hostname\
 $directory\
 $git_branch\
 $git_state\
@@ -106,6 +107,11 @@ disabled = false
 style = "bg:color1 fg:text"
 format = "[ $symbol ]($style)"
 
+[hostname]
+ssh_only = false
+style = "bg:color1 fg:text"
+format = "[$hostname ]($style)"
+
 [directory]
 style = "fg:darker_bg bg:background"
 read_only = " 󰉐 "
@@ -125,7 +131,7 @@ truncation_symbol = " /"
 "/" = "  "
 
 [git_branch]
-symbol = ""
+symbol = "󰘬"
 style = "fg:darker_bg bg:color10"
 format = '[ $symbol $branch ]($style)'
 
