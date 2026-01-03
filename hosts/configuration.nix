@@ -22,17 +22,27 @@
 #           └─ default.nix
 #
 
-{ lib, config, pkgs, unstable, inputs, vars, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  unstable,
+  inputs,
+  vars,
+  ...
+}:
 
 let
   terminal = pkgs.${vars.terminal};
 in
 {
-  imports = (import ../modules/desktops ++
-    import ../modules/editors ++
-    import ../modules/programs ++
-    import ../modules/shell ++
-    import ../modules/theming);
+  imports = (
+    import ../modules/desktops
+    ++ import ../modules/editors
+    ++ import ../modules/programs
+    ++ import ../modules/shell
+    ++ import ../modules/theming
+  );
 
   boot = {
     tmp = {
@@ -40,10 +50,13 @@ in
       tmpfsSize = "5GB";
     };
   };
-  
+
   users.users.${vars.user} = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     openssh = {
       authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBy0Ayh+LE/JgCOREmmbaurPg00u1UtbuReYLqVix2MG marika"
@@ -54,7 +67,7 @@ in
   };
 
   time.timeZone = "America/New_York";
-    i18n = {
+  i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
@@ -136,25 +149,25 @@ in
       cmake
       ripgrep
       vscode
-      nixpkgs-fmt
+      nixfmt
 
       # Other Packages Found @
       # - ./<host>/default.nix
       # - ../modules
     ];
   };
-    # ++
-    # (with unstable; [
-    #   # Apps
-    #   # firefox # Browser
-    #   # image-roll # Image Viewer
-    # ]);
+  # ++
+  # (with unstable; [
+  #   # Apps
+  #   # firefox # Browser
+  #   # image-roll # Image Viewer
+  # ]);
 
   programs = {
-      dconf.enable = true;
+    dconf.enable = true;
   };
 
-  hardware ={
+  hardware = {
     bluetooth.enable = true;
   };
   services = {

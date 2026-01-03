@@ -14,8 +14,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/desktops/virtualization/docker.nix
-  ] ++
-  (import ../../modules/desktops/virtualization);
+  ]
+  ++ (import ../../modules/desktops/virtualization);
 
   boot = {
     consoleLogLevel = 3;
@@ -61,9 +61,12 @@
       enable = true;
       xkb = {
         variant = "";
-	layout = "us";
+        layout = "us";
       };
-      videoDrivers = [ "displaylink" "modesetting"];
+      videoDrivers = [
+        "displaylink"
+        "modesetting"
+      ];
       desktopManager.plasma5.enable = true;
       displayManager.sessionCommands = ''
         LEFT='DVI-I-1-1'

@@ -9,7 +9,16 @@
 #           └─ default.nix
 #
 
-{ inputs, nixpkgs, nixpkgs-unstable, nixos-hardware, home-manager, plasma-manager, vars, ... }:
+{
+  inputs,
+  nixpkgs,
+  nixpkgs-unstable,
+  nixos-hardware,
+  home-manager,
+  plasma-manager,
+  vars,
+  ...
+}:
 
 let
   system = "x86_64-linux";
@@ -31,7 +40,12 @@ in
   marika = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars;
+      inherit
+        inputs
+        system
+        unstable
+        vars
+        ;
       host = {
         hostName = "marika";
       };
@@ -49,7 +63,12 @@ in
   millicent = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system unstable vars;
+      inherit
+        inputs
+        system
+        unstable
+        vars
+        ;
       host = {
         hostName = "millicent";
       };

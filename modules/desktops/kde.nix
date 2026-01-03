@@ -1,4 +1,11 @@
-{ config, lib, pkgs, vars, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  inputs,
+  ...
+}:
 
 with lib;
 {
@@ -20,7 +27,7 @@ with lib;
       };
     };
 
-  services = {
+    services = {
       xserver = {
         enable = true;
         layout = "us";
@@ -37,7 +44,7 @@ with lib;
       systemPackages = with pkgs.libsForQt5; [
         bismuth # Dynamic Tiling
         packagekit-qt # Package Updater
-	      plasma-thunderbolt
+        plasma-thunderbolt
       ];
     };
 

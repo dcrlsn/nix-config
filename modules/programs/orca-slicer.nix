@@ -28,7 +28,7 @@ in
 {
   environment.systemPackages = with pkgs; [
     orca-slicer-wrapped
-    
+
     # GTK dependencies
     gtk3
     glib

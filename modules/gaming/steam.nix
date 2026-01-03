@@ -1,6 +1,14 @@
-{ config, lib, system, pkgs, unstable, vars, ... }:
+{
+  config,
+  lib,
+  system,
+  pkgs,
+  unstable,
+  vars,
+  ...
+}:
 
-{  
+{
   programs.steam.enable = true;
 
   services.sunshine = {
@@ -12,10 +20,21 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 47984 47989 47990 48010 ];
+    allowedTCPPorts = [
+      47984
+      47989
+      47990
+      48010
+    ];
     allowedUDPPortRanges = [
-      { from = 47998; to = 48000; }
-      { from = 8000; to = 8010; }
+      {
+        from = 47998;
+        to = 48000;
+      }
+      {
+        from = 8000;
+        to = 8010;
+      }
     ];
   };
 }

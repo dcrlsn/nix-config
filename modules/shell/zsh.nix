@@ -19,18 +19,18 @@
 
       ohMyZsh = {
         enable = true;
-        plugins = [ 
+        plugins = [
           "git"
           "tmux"
         ];
       };
-      
+
       shellInit = ''
-        # I shouldnt have to do this...
-	eval "$(starship init zsh)"
-        # DirEnv Hook
-        eval "$(direnv hook zsh)"
-        ZSH_TMUX_AUTOSTART=true
+          # I shouldnt have to do this...
+        	eval "$(starship init zsh)"
+          # DirEnv Hook
+          eval "$(direnv hook zsh)"
+          ZSH_TMUX_AUTOSTART=true
       '';
     };
   };

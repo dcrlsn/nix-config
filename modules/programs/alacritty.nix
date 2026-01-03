@@ -12,7 +12,9 @@
         settings = {
           font = {
             normal.family = "FiraCode Nerd Font";
-            bold = { style = "Bold"; };
+            bold = {
+              style = "Bold";
+            };
             size = 10;
           };
           scrolling = {

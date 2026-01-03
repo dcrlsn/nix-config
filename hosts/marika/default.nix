@@ -8,16 +8,18 @@
 #   │        ├─ default.nix *
 #   │        └─ hardware-configuration.nix
 
-{ pkgs, lib, unstable, ... }:
+{
+  pkgs,
+  lib,
+  unstable,
+  ...
+}:
 
 {
   imports = [
     ./hardware-configuration.nix
-  ] ++
-  (
-    import ../../modules/desktops/virtualization ++
-    import ../../modules/gaming
-  );
+  ]
+  ++ (import ../../modules/desktops/virtualization ++ import ../../modules/gaming);
 
   boot = {
     consoleLogLevel = 3;
@@ -36,34 +38,35 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      # Chat... thisll probably move
-      discord
-      betterdiscordctl
-      # Media
-      spotify
-      # Network Displays
-      gnome-network-displays
-      # Games
-      # Other
-      flatpak
-    ] ++
-    (with unstable; [
-      # Apps
-      # firefox # Browser
-      # image-roll # Image Viewer
-    ]);
+    systemPackages =
+      with pkgs;
+      [
+        # Chat... thisll probably move
+        discord
+        betterdiscordctl
+        # Media
+        spotify
+        # Network Displays
+        gnome-network-displays
+        # Games
+        # Other
+        flatpak
+      ]
+      ++ (with unstable; [
+        # Apps
+        # firefox # Browser
+        # image-roll # Image Viewer
+      ]);
   };
-
 
   services = {
     xserver = {
       enable = true;
       xkb = {
-	      layout = "us";
+        layout = "us";
         variant = "";
       };
-      videoDrivers = [ "nvidia"];
+      videoDrivers = [ "nvidia" ];
     };
     desktopManager.plasma6.enable = true;
     displayManager = {

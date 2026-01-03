@@ -1,4 +1,12 @@
-{ config, lib, system, pkgs, unstable, vars, ... }:
+{
+  config,
+  lib,
+  system,
+  pkgs,
+  unstable,
+  vars,
+  ...
+}:
 
 let
   colors = import ../theming/colors.nix;
@@ -33,4 +41,3 @@ in
     };
   };
 }
-
