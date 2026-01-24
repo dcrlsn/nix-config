@@ -133,6 +133,7 @@ in
       appimage-run # Runs AppImages on NixOS
       firefox # Browser
       google-chrome # Browser
+      rustdesk-flutter # Remote Desktop
 
       # File Management
       p7zip # Zip Encryption
