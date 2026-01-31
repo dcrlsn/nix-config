@@ -12,4 +12,5 @@
 
 [
   ./steam.nix
+  ./cemu.nix
 ]
