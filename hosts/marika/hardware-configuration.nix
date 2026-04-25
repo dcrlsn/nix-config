@@ -16,7 +16,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
+  boot.kernelPackages = unstable.linuxKernel.packages.linux_7_0;
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -69,7 +69,7 @@
 
     nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = false;
+      powerManagement.enable = true;
       powerManagement.finegrained = false;
       open = true;
       nvidiaSettings = true;

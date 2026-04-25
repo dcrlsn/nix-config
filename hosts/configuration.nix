@@ -106,66 +106,66 @@ in
       EDITOR = "${vars.editor}";
       VISUAL = "${vars.editor}";
     };
-    systemPackages = with pkgs; [
-      #Terminal
-      terminal # Terminal Emulator
-      xclip # Terminal Clipboard
-      btop # Resource Manager
-      coreutils # GNU Utilities
-      git # Version Control
-      gh # GitHub CLI
-      gvfs # Samba
-      killall # Process Killer
-      lshw # Hardware Config
-      nano # Text Editor
-      nix-tree # Browse Nix Store
-      pciutils # Manage PCI
-      tldr # Helper
-      usbutils # Manage USB
-      wget # Retriever
-      xdg-utils # Environment integration
-      fastfetch # Just cause
+    systemPackages =
+      with pkgs;
+      [
+        #Terminal
+        terminal # Terminal Emulator
+        xclip # Terminal Clipboard
+        btop # Resource Manager
+        coreutils # GNU Utilities
+        git # Version Control
+        gh # GitHub CLI
+        gvfs # Samba
+        killall # Process Killer
+        lshw # Hardware Config
+        nano # Text Editor
+        nix-tree # Browse Nix Store
+        pciutils # Manage PCI
+        tldr # Helper
+        usbutils # Manage USB
+        wget # Retriever
+        xdg-utils # Environment integration
+        fastfetch # Just cause
 
-      # Video/Audio
-      vlc # Media Player
+        # Video/Audio
+        vlc # Media Player
 
-      # Apps
-      appimage-run # Runs AppImages on NixOS
-      firefox # Browser
-      google-chrome # Browser
-      rustdesk-flutter # Remote Desktop
+        # Apps
+        appimage-run # Runs AppImages on NixOS
+        firefox # Browser
+        google-chrome # Browser
+        rustdesk-flutter # Remote Desktop
 
-      # File Management
-      p7zip # Zip Encryption
-      rsync # Syncer - $ rsync -r dir1/ dir2/
-      zip # Zip
-      unzip # unzip
+        # File Management
+        p7zip # Zip Encryption
+        rsync # Syncer - $ rsync -r dir1/ dir2/
+        zip # Zip
+        unzip # unzip
 
-      # Work
-      slack
-      teams-for-linux
+        # Work
+        slack
+        teams-for-linux
 
-      # Other
-      gcc
-      cmake
-      ripgrep
-      vscode
-      nixfmt
+        # Other
+        distrobox
+        gcc
+        cmake
+        ripgrep
+        nixfmt
 
-      # Other Packages Found @
-      # - ./<host>/default.nix
-      # - ../modules
-    ];
+        # Other Packages Found @
+        # - ./<host>/default.nix
+        # - ../modules
+      ]
+      ++ (with unstable; [
+        vscode
+      ]);
   };
-  # ++
-  # (with unstable; [
-  #   # Apps
-  #   # firefox # Browser
-  #   # image-roll # Image Viewer
-  # ]);
 
   programs = {
     dconf.enable = true;
+    nix-ld.enable = true;
   };
 
   hardware = {
