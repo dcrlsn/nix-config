@@ -28,18 +28,18 @@ $character"""
 palette = "tokyo"
 
 [palettes.tokyo]
-foreground = "#e3e5e5"
-background = "#769ff0"
-dark_bg = "#212736"
-darker_bg = "#1d2230"
-text = "#090c0c"
-cursor = "#769ff0"
-color1 = "#a3aed2"
-color2 = "#769ff0"
-color3 = "#394260"
-color4 = "#090c0c"
-color5 = "#e3e5e5"
-color6 = "#a0a9cb"
+foreground = "#c0caf5"
+background = "#7aa2f7"
+dark_bg = "#292e42"
+darker_bg = "#16161e"
+text = "#15161e"
+cursor = "#7aa2f7"
+color1 = "#7dcfff"
+color2 = "#7aa2f7"
+color3 = "#414868"
+color4 = "#15161e"
+color5 = "#c0caf5"
+color6 = "#7dcfff"
 color7 = "#f7768e"
 color8 = "#e0af68"
 color9 = "#bb9af7"
@@ -230,10 +230,10 @@ empty_symbol = "󰂃"
 format = "[ $percentage$symbol ]($style)"
 [[battery.display]]
 threshold = 10
-style = "bold bg:#darker_bg fg:#color7"
+style = "bold bg:darker_bg fg:color7"
 [[battery.display]]
 threshold = 20
-style = "bg:#darker_bg fg:#color7"
+style = "bg:darker_bg fg:color7"
 
 [cmd_duration]
 # disabled = true

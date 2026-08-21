@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs,
+  vars,
   ...
 }:
 
@@ -19,6 +20,7 @@ let
       antigravityPkgs.google-antigravity-ide
     else
       antigravityPkgs.google-antigravity-ide-no-fhs;
+  tokyoNightExt = pkgs.vscode-extensions.enkia.tokyo-night;
 in
 {
   options.custom.editors.antigravity = {
@@ -52,6 +54,16 @@ in
 
     environment.shellAliases = lib.mkIf cfg.enableCli {
       anti = "antigravity-ide";
+    };
+
+    home-manager.users.${vars.user} = lib.mkIf cfg.enableIde {
+      home.file = {
+        ".antigravity-ide/extensions/${tokyoNightExt.vscodeExtUniqueId}".source =
+          "${tokyoNightExt}/share/vscode/extensions/${tokyoNightExt.vscodeExtUniqueId}";
+        ".config/Antigravity IDE/User/settings.json".text = builtins.toJSON {
+          "workbench.colorTheme" = "Tokyo Night";
+        };
+      };
     };
   };
 }

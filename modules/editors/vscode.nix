@@ -3,6 +3,7 @@
   lib,
   pkgs,
   unstable ? pkgs,
+  vars,
   ...
 }:
 
@@ -12,8 +13,20 @@
   };
 
   config = lib.mkIf config.custom.editors.vscode.enable {
-    environment.systemPackages = [
-      unstable.vscode
-    ];
+    home-manager.users.${vars.user} = {
+      programs.vscode = {
+        enable = true;
+        package = unstable.vscode;
+        mutableExtensionsDir = true;
+        profiles.default = {
+          extensions = [
+            pkgs.vscode-extensions.enkia.tokyo-night
+          ];
+          userSettings = {
+            "workbench.colorTheme" = "Tokyo Night";
+          };
+        };
+      };
+    };
   };
 }

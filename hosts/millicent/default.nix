@@ -18,10 +18,16 @@
     };
     editors = {
       nvim.enable = true;
+      antigravity.enable = true;
       vscode.enable = true;
+    };
+    gaming = {
+      steam.enable = true;
     };
     programs = {
       alacritty.enable = true;
+      bambu-studio.enable = true;
+      copilot.enable = true;
       discord.enable = true;
     };
     shell = {
