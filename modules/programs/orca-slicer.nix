@@ -6,6 +6,9 @@
 }:
 
 let
+  cfg = config.custom.programs.orca-slicer;
+  isNvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
+
   orca-slicer-wrapped = pkgs.symlinkJoin {
     name = "orca-slicer-wrapped";
     paths = [ pkgs.orca-slicer ];
@@ -25,17 +28,25 @@ let
         --set GALLIUM_HUD_VISIBLE false
     '';
   };
+
+  orcaPkg = if cfg.nvidiaWorkaround then orca-slicer-wrapped else pkgs.orca-slicer;
 in
 {
   options.custom.programs.orca-slicer = {
-    enable = lib.mkEnableOption "Wrapped Orca Slicer with NVIDIA Zink compatibility";
+    enable = lib.mkEnableOption "Orca Slicer";
+    nvidiaWorkaround = lib.mkOption {
+      type = lib.types.bool;
+      default = isNvidia;
+      description = "Wrap Orca Slicer with NVIDIA Zink compatibility flags";
+    };
   };
 
-  config = lib.mkIf config.custom.programs.orca-slicer.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      orca-slicer-wrapped
+      orcaPkg
       gtk3
       glib
     ];
   };
 }
+
