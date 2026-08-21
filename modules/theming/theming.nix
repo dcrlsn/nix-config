@@ -1,25 +1,17 @@
-#
-#  GTK
-#
-
 {
-  lib,
   config,
+  lib,
   pkgs,
-  host,
   vars,
   ...
 }:
 
 {
-  home-manager.users.${vars.user} = {
-    home = {
-      pointerCursor = {
-        gtk.enable = true;
-        name = "Dracula-cursors";
-        package = pkgs.dracula-theme;
-        size = 16;
-      };
-    };
+  options.custom.theming = {
+    enable = lib.mkEnableOption "Custom desktop and GTK theming";
+  };
+
+  config = lib.mkIf config.custom.theming.enable {
+    # Custom theming hooks / pointer cursors / GTK settings can be enabled here
   };
 }

@@ -1,16 +1,22 @@
-#
-#  Shell
-#
-
-{ pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  vars,
+  ...
+}:
 
 {
-  users.users.${vars.user} = {
-    shell = pkgs.zsh;
+  options.custom.shell.zsh = {
+    enable = lib.mkEnableOption "Zsh shell configuration";
   };
 
-  programs = {
-    zsh = {
+  config = lib.mkIf config.custom.shell.zsh.enable {
+    users.users.${vars.user} = {
+      shell = pkgs.zsh;
+    };
+
+    programs.zsh = {
       enable = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
@@ -26,11 +32,9 @@
       };
 
       shellInit = ''
-          # I shouldnt have to do this...
-        	eval "$(starship init zsh)"
-          # DirEnv Hook
-          eval "$(direnv hook zsh)"
-          ZSH_TMUX_AUTOSTART=true
+        eval "$(starship init zsh)"
+        eval "$(direnv hook zsh)"
+        ZSH_TMUX_AUTOSTART=true
       '';
     };
   };

@@ -1,18 +1,29 @@
-#
-#  Docker
-#
-
-{ pkgs, vars, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  unstable ? pkgs,
+  vars,
+  ...
+}:
 
 {
-  virtualisation = {
-    docker.enable = true;
+  options.custom.desktops.virtualization.docker = {
+    enable = lib.mkEnableOption "Docker container engine and tools";
   };
 
-  users.groups.docker.members = [ "${vars.user}" ];
+  config = lib.mkIf config.custom.desktops.virtualization.docker.enable {
+    virtualisation = {
+      docker = {
+        enable = true;
+        package = unstable.docker;
+      };
+    };
 
-  environment.systemPackages = with pkgs; [
-    docker # Containers
-    docker-compose # Multi-Container
-  ];
+    users.groups.docker.members = [ "${vars.user}" ];
+
+    environment.systemPackages = [
+      unstable.docker-compose
+    ];
+  };
 }

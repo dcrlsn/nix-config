@@ -16,7 +16,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelPackages = unstable.linuxKernel.packages.linux_7_0;
+  boot.kernelPackages = unstable.linuxKernel.packages.linux_7_1;
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"

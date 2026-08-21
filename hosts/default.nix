@@ -1,12 +1,5 @@
 #
-#  These are the different profiles that can be used when building NixOS.
-#
-#  flake.nix
-#   └─ ./hosts
-#       ├─ default.nix *
-#       ├─ configuration.nix
-#       └─ ./<host>.nix
-#           └─ default.nix
+#  NixOS Host Profiles with Dendritic Module Loading
 #
 
 {
@@ -15,6 +8,7 @@
   nixpkgs-unstable,
   nixos-hardware,
   home-manager,
+  home-manager-unstable,
   plasma-manager,
   vars,
   ...
@@ -34,11 +28,12 @@ let
   };
 
   lib = nixpkgs.lib;
+  unstable-lib = nixpkgs-unstable.lib;
 in
 {
-  # Desktop Profiles
-  marika = lib.nixosSystem {
+  marika = unstable-lib.nixosSystem {
     inherit system;
+    pkgs = unstable;
     specialArgs = {
       inherit
         inputs
@@ -51,17 +46,19 @@ in
       };
     };
     modules = [
+      ../modules
       ./marika
-      ./configuration.nix
-      home-manager.nixosModules.home-manager
+      home-manager-unstable.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
       }
     ];
   };
+
   millicent = lib.nixosSystem {
     inherit system;
+    pkgs = pkgs;
     specialArgs = {
       inherit
         inputs
@@ -74,8 +71,8 @@ in
       };
     };
     modules = [
+      ../modules
       ./millicent
-      ./configuration.nix
       home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
@@ -83,5 +80,4 @@ in
       }
     ];
   };
-
 }

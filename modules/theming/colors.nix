@@ -1,9 +1,7 @@
-#
-#  System Themes
-#
+{ ... }:
 
-{
-  scheme = {
+let
+  schemes = {
     default = {
       scheme = "One Dark Pro";
       hex = {
@@ -49,7 +47,7 @@
     onedark = {
       scheme = "One Dark Pro";
       hex = {
-        bg = "111111"; # 283c34
+        bg = "111111";
         fg = "abb2bf";
         red = "e06c75";
         orange = "d19a66";
@@ -111,12 +109,12 @@
 
     dracula = {
       scheme = "Dracula";
-      base00 = "282936"; # background
+      base00 = "282936";
       base01 = "3a3c4e";
       base02 = "4d4f68";
       base03 = "626483";
       base04 = "62d6e8";
-      base05 = "e9e9f4"; # foreground
+      base05 = "e9e9f4";
       base06 = "f1f2f8";
       base07 = "f7f7fb";
       base08 = "ea51b2";
@@ -129,4 +127,7 @@
       base0F = "00f769";
     };
   };
+in
+{
+  _module.args.themeColors = schemes;
 }

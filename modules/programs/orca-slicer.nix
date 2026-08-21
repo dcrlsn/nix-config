@@ -1,8 +1,9 @@
-#
-#  Orca due to nvidia's bullshit
-#
-
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   orca-slicer-wrapped = pkgs.symlinkJoin {
@@ -26,11 +27,15 @@ let
   };
 in
 {
-  environment.systemPackages = with pkgs; [
-    orca-slicer-wrapped
+  options.custom.programs.orca-slicer = {
+    enable = lib.mkEnableOption "Wrapped Orca Slicer with NVIDIA Zink compatibility";
+  };
 
-    # GTK dependencies
-    gtk3
-    glib
-  ];
+  config = lib.mkIf config.custom.programs.orca-slicer.enable {
+    environment.systemPackages = with pkgs; [
+      orca-slicer-wrapped
+      gtk3
+      glib
+    ];
+  };
 }

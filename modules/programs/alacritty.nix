@@ -1,24 +1,34 @@
-#
-#  Terminal Emulator
-#
-
-{ vars, ... }:
+{
+  config,
+  lib,
+  vars,
+  ...
+}:
 
 {
-  home-manager.users.${vars.user} = {
-    programs = {
-      alacritty = {
-        enable = true;
-        settings = {
-          font = {
-            normal.family = "FiraCode Nerd Font";
-            bold = {
-              style = "Bold";
+  options.custom.programs.alacritty = {
+    enable = lib.mkEnableOption "Alacritty terminal emulator";
+  };
+
+  config = lib.mkIf config.custom.programs.alacritty.enable {
+    home-manager.users.${vars.user} = {
+      programs = {
+        alacritty = {
+          enable = true;
+          settings = {
+            window = {
+              decorations = "Full";
             };
-            size = 10;
-          };
-          scrolling = {
-            history = 0;
+            font = {
+              normal.family = "FiraCode Nerd Font";
+              bold = {
+                style = "Bold";
+              };
+              size = 10;
+            };
+            scrolling = {
+              history = 0;
+            };
           };
         };
       };

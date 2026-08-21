@@ -1,25 +1,49 @@
 #
-#  Specific system configuration settings for framework 13
+#  Specific system configuration settings for marika
 #
-#  flake.nix
-#   ├─ ./hosts
-#   │   ├─ default.nix
-#   │   └─ ./millicent
-#   │        ├─ default.nix *
-#   │        └─ hardware-configuration.nix
 
-{
-  pkgs,
-  lib,
-  unstable,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-  ]
-  ++ (import ../../modules/desktops/virtualization ++ import ../../modules/gaming);
+  ];
+
+  # Enabled Custom Features (Dendritic Pattern)
+  custom = {
+    core.enable = true;
+    desktops = {
+      kde.enable = true;
+      virtualization.docker.enable = true;
+    };
+    editors = {
+      nvim.enable = true;
+      antigravity.enable = true;
+      vscode.enable = true;
+    };
+    gaming = {
+      steam.enable = true;
+      cemu.enable = true;
+    };
+    programs = {
+      alacritty.enable = true;
+      orca-slicer.enable = true;
+      bambu-studio.enable = true;
+      copilot.enable = true;
+      discord.enable = true;
+    };
+    shell = {
+      zsh.enable = true;
+      tmux.enable = true;
+      git.enable = true;
+      starship.enable = true;
+      direnv.enable = true;
+    };
+    theming.enable = true;
+  };
+
+  nixpkgs.flake.setFlakeRegistry = false;
+  nixpkgs.flake.setNixPath = false;
 
   boot = {
     consoleLogLevel = 3;
@@ -37,40 +61,12 @@
     };
   };
 
-  environment = {
-    systemPackages =
-      with pkgs;
-      [
-        # Chat... thisll probably move
-        discord
-        betterdiscordctl
-        # Media
-        spotify
-        # Network Displays
-        gnome-network-displays
-        # Games
-        # Other
-        flatpak
-      ]
-      ++ (with unstable; [
-        # Apps
-        # firefox # Browser
-        # image-roll # Image Viewer
-      ]);
-  };
+  environment.systemPackages = with pkgs; [
+    spotify
+    gnome-network-displays
+    flatpak
+    ngrok
+  ];
 
-  services = {
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-      videoDrivers = [ "nvidia" ];
-    };
-    desktopManager.plasma6.enable = true;
-    displayManager = {
-      defaultSession = "plasma";
-    };
-  };
+  services.xserver.videoDrivers = [ "nvidia" ];
 }

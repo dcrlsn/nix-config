@@ -1,18 +1,29 @@
-{ vars, pkgs, ... }:
+{
+  config,
+  lib,
+  vars,
+  ...
+}:
 
 {
-  home-manager.users.${vars.user} = {
-    programs.tmux = {
-      enable = true;
-      clock24 = true;
-      mouse = true;
-      baseIndex = 1;
-      historyLimit = 10000;
-      extraConfig = ''
-        bind | split-window -h -c "#{pane_current_path}"
-        bind - split-window -v -c "#{pane_current_path}"
-        bind c new-window -c "#{pane_current_path}"
-      '';
+  options.custom.shell.tmux = {
+    enable = lib.mkEnableOption "Tmux terminal multiplexer";
+  };
+
+  config = lib.mkIf config.custom.shell.tmux.enable {
+    home-manager.users.${vars.user} = {
+      programs.tmux = {
+        enable = true;
+        clock24 = true;
+        mouse = true;
+        baseIndex = 1;
+        historyLimit = 10000;
+        extraConfig = ''
+          bind | split-window -h -c "#{pane_current_path}"
+          bind - split-window -v -c "#{pane_current_path}"
+          bind c new-window -c "#{pane_current_path}"
+        '';
+      };
     };
   };
 }

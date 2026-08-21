@@ -7,50 +7,41 @@
   ...
 }:
 
-with lib;
 {
-  options = {
-    kde = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-      };
-    };
+  options.custom.desktops.kde = {
+    enable = lib.mkEnableOption "KDE Plasma 6 desktop environment";
   };
 
-  config = mkIf (config.kde.enable) {
+  config = lib.mkIf config.custom.desktops.kde.enable {
     programs = {
       zsh.enable = true;
-      kdeconnect = {
-        enable = true;
-        package = pkgs.gnomeExtensions.gsconnect;
-      };
+      kdeconnect.enable = true;
     };
 
     services = {
       xserver = {
         enable = true;
-        layout = "us";
-        xkbVariant = "";
-        displayManager = {
-          sddm.wayland.enable = true;
-          defaultSession = "plasma";
+        xkb = {
+          layout = "us";
+          variant = "";
         };
-        desktopManager.plasma5.enable = true;
+      };
+      desktopManager.plasma6.enable = true;
+      displayManager = {
+        sddm.wayland.enable = true;
+        defaultSession = "plasma";
       };
     };
 
     environment = {
-      systemPackages = with pkgs.libsForQt5; [
-        bismuth # Dynamic Tiling
-        packagekit-qt # Package Updater
-        plasma-thunderbolt
+      systemPackages = with pkgs.kdePackages; [
+        packagekit-qt
       ];
     };
 
     home-manager.users.${vars.user} = {
       imports = [
-        inputs.plasma-manager.homeManagerModules.plasma-manager
+        (inputs.plasma-manager.homeModules.plasma-manager or inputs.plasma-manager.homeManagerModules.plasma-manager)
       ];
       programs.plasma = {
         enable = true;
