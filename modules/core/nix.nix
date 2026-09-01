@@ -13,7 +13,6 @@ lib.mkIf config.custom.core.enable {
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 2d";
     };
     registry.nixpkgs.flake = inputs.nixpkgs;
     extraOptions = ''

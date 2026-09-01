@@ -20,6 +20,7 @@
       nvim.enable = true;
       antigravity.enable = true;
       vscode.enable = true;
+      vscode-insiders.enable = true;
     };
     gaming = {
       steam.enable = true;

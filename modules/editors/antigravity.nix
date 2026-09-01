@@ -60,8 +60,11 @@ in
       home.file = {
         ".antigravity-ide/extensions/${tokyoNightExt.vscodeExtUniqueId}".source =
           "${tokyoNightExt}/share/vscode/extensions/${tokyoNightExt.vscodeExtUniqueId}";
-        ".config/Antigravity IDE/User/settings.json".text = builtins.toJSON {
-          "workbench.colorTheme" = "Tokyo Night";
+        ".config/Antigravity IDE/User/settings.json" = {
+          text = builtins.toJSON {
+            "workbench.colorTheme" = "Tokyo Night";
+          };
+          force = true;
         };
       };
     };

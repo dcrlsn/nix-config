@@ -4,6 +4,7 @@
   pkgs,
   vars,
   inputs,
+  themeColors,
   ...
 }:
 
@@ -41,10 +42,20 @@
 
     home-manager.users.${vars.user} = {
       imports = [
-        (inputs.plasma-manager.homeModules.plasma-manager or inputs.plasma-manager.homeManagerModules.plasma-manager)
+        (inputs.plasma-manager.homeModules.plasma-manager
+          or inputs.plasma-manager.homeManagerModules.plasma-manager
+        )
       ];
       programs.plasma = {
         enable = true;
+        workspace = {
+          colorScheme = "BreezeDark";
+        };
+        configFile = {
+          "kdeglobals"."General"."AccentColor" = "${themeColors.default.rgb.blue}";
+          "kdeglobals"."General"."LastUsedCustomAccentColor" = "${themeColors.default.rgb.blue}";
+          "kdeglobals"."Icons"."Theme" = "breeze-dark";
+        };
       };
     };
   };
