@@ -63,6 +63,9 @@ in
         ".config/Antigravity IDE/User/settings.json" = {
           text = builtins.toJSON {
             "workbench.colorTheme" = "Tokyo Night";
+            "editor.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
+            "editor.fontLigatures" = true;
+            "terminal.integrated.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
           };
           force = true;
         };

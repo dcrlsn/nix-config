@@ -24,6 +24,9 @@
           ];
           userSettings = {
             "workbench.colorTheme" = "Tokyo Night";
+            "editor.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
+            "editor.fontLigatures" = true;
+            "terminal.integrated.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
           };
         };
       };
