@@ -34,9 +34,10 @@ in
           bind c new-window -c "#{pane_current_path}"
 
           # Tokyo Night Theme Colors
+          set -g status-interval 1
           set -g status-style "bg=#${c.bg_dark},fg=#${c.fg}"
           set -g status-left "#[bg=#${c.blue},fg=#${c.black},bold] #S #[bg=#${c.bg_dark},fg=#${c.blue}] "
-          set -g status-right "#[fg=#${c.gray},bg=#${c.bg_dark}] %Y-%m-%d #[fg=#${c.blue},bg=#${c.bg_dark}] %H:%M #[bg=#${c.purple},fg=#${c.black},bold] #h "
+          set -g status-right "#[fg=#${c.gray},bg=#${c.bg_dark}] %Y.%m.%d #[fg=#${c.blue},bg=#${c.bg_dark}] %H:%M:%S #[bg=#${c.purple},fg=#${c.black},bold] #h "
 
           set -g window-status-separator ""
           set -g window-status-style "bg=#${c.bg_dark},fg=#${c.comment}"

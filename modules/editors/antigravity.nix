@@ -9,7 +9,7 @@
 
 let
   cfg = config.custom.editors.antigravity;
-  antigravityPkgs = inputs.antigravity-nix.packages.${pkgs.system};
+  antigravityPkgs = inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system};
   baseAppPkg =
     if cfg.useFHS then
       antigravityPkgs.google-antigravity
