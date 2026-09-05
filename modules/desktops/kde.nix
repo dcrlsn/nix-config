@@ -17,9 +17,11 @@
     programs = {
       zsh.enable = true;
       kdeconnect.enable = true;
+      dconf.enable = true;
     };
 
     services = {
+      gvfs.enable = true;
       xserver = {
         enable = true;
         xkb = {
@@ -35,8 +37,10 @@
     };
 
     environment = {
-      systemPackages = with pkgs.kdePackages; [
-        packagekit-qt
+      systemPackages = [
+        pkgs.kdePackages.packagekit-qt
+        pkgs.xclip
+        pkgs.xdg-utils
       ];
       plasma6.excludePackages = with pkgs.kdePackages; [
         elisa
