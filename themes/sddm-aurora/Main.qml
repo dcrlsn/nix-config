@@ -7,6 +7,11 @@ Item {
     width: 1920
     height: 1080
 
+    property string mainFont: "FiraCode Nerd Font"
+    property string iconFont: "FiraCode Nerd Font Propo"
+    property bool hasBattery: (typeof battery !== "undefined" && battery !== null && battery.percent !== undefined)
+    property int batteryPercent: hasBattery ? battery.percent : 0
+
     Image {
         id: bg
         anchors.fill: parent
@@ -23,6 +28,7 @@ Item {
         Text {
             id: timeDisplay
             color: "white"
+            font.family: root.mainFont
             font.pixelSize: 72
             font.bold: true
             anchors.horizontalCenter: parent.horizontalCenter
@@ -40,6 +46,7 @@ Item {
         Text {
             id: dateDisplay
             color: Qt.rgba(1, 1, 1, 0.8)
+            font.family: root.mainFont
             font.pixelSize: 20
             font.bold: true
             anchors.horizontalCenter: parent.horizontalCenter
@@ -67,10 +74,12 @@ Item {
     }
 
     Row {
+        id: batteryIndicator
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: 40
         spacing: 12
+        visible: root.hasBattery
 
         Item {
             width: 38
@@ -82,14 +91,14 @@ Item {
                 anchors.fill: parent
                 anchors.rightMargin: 4
                 color: "transparent"
-                border.color: "#111111"
+                border.color: "white"
                 border.width: 2
                 radius: 4
 
                 layer.enabled: true
                 layer.effect: DropShadow {
                     transparentBorder: true
-                    color: Qt.rgba(0, 0, 0, 0.2)
+                    color: Qt.rgba(0, 0, 0, 0.4)
                     radius: 8
                     samples: 16
                 }
@@ -100,8 +109,8 @@ Item {
                     anchors.left: parent.left
                     anchors.margins: 3
                     
-                    width: (parent.width - 6) * (typeof battery !== "undefined" ? battery.percent / 100.0 : 1.0)
-                    color: "#111111"
+                    width: Math.max(0, (parent.width - 6) * Math.min(1.0, root.batteryPercent / 100.0))
+                    color: "white"
                     radius: 2
                 }
             }
@@ -109,34 +118,43 @@ Item {
             Rectangle {
                 width: 4
                 height: 8
-                color: "#111111"
+                color: "white"
                 radius: 2
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
+
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    transparentBorder: true
+                    color: Qt.rgba(0, 0, 0, 0.4)
+                    radius: 4
+                    samples: 8
+                }
             }
         }
 
         // Percentage Text
         Text {
-            text: (typeof battery !== "undefined" ? battery.percent : "100") + "%"
-            color: "#111111"
+            text: root.batteryPercent + "%"
+            color: "white"
+            font.family: root.mainFont
             font.pixelSize: 20
             font.bold: true
             anchors.verticalCenter: parent.verticalCenter
 
             layer.enabled: true
             layer.effect: DropShadow {
-                color: Qt.rgba(0, 0, 0, 0.1)
-                radius: 4
-                samples: 8
+                color: Qt.rgba(0, 0, 0, 0.5)
+                radius: 8
+                samples: 16
             }
         }
     }
 
     Item {
         id: loginContainer
-        width: 420
-        height: 500
+        width: 380
+        height: 250
         anchors.centerIn: parent
 
         ShaderEffectSource {
@@ -155,32 +173,23 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            radius: 24
+            radius: 20
             color: Qt.rgba(0, 0, 0, 0.2) 
             border.color: Qt.rgba(1, 1, 1, 0.6) 
             border.width: 2
 
             Column {
                 anchors.centerIn: parent
-                width: parent.width * 0.8
-                spacing: 25
-
-                Rectangle {
-                    width: 120
-                    height: 120
-                    radius: 60
-                    color: Qt.rgba(0, 0, 0, 0.3)
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    border.color: Qt.rgba(1, 1, 1, 0.8)
-                    border.width: 2
-                }
+                width: parent.width * 0.82
+                spacing: 18
 
                 Text {
                     id: usernameDisplay
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: (userModel.lastUser !== "root" && userModel.lastUser !== "") ? userModel.lastUser : "Guest"
                     color: "white"
-                    font.pixelSize: 24 
+                    font.family: root.mainFont
+                    font.pixelSize: 22 
                     font.bold: true
                     
                     layer.enabled: true
@@ -194,11 +203,13 @@ Item {
                 TextField {
                     id: passwordField
                     width: parent.width
+                    height: 45
                     placeholderText: "Password"
                     placeholderTextColor: Qt.rgba(1, 1, 1, 0.6)
                     echoMode: TextInput.Password
                     color: "white"
-                    font.pixelSize: 18
+                    font.family: root.mainFont
+                    font.pixelSize: 16
                     focus: true 
                     leftPadding: 14
                     rightPadding: 14
@@ -213,9 +224,11 @@ Item {
                     id: loginBtn
                     text: "LOGIN"
                     width: parent.width
+                    height: 45
                     contentItem: Text {
                         text: parent.text
                         color: "white" 
+                        font.family: root.mainFont
                         font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
@@ -277,43 +290,88 @@ Item {
         contentItem: Text {
             text: parent.displayText
             color: "white"
+            font.family: root.mainFont
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }
 
-        background: Rectangle {
-            color: sessionSelector.hovered ? "#333333" : "#111111"
-            border.color: "#333333"
-            border.width: 2
-            radius: 10
-            Behavior on color { ColorAnimation { duration: 150 } }
+        background: Item {
+            scale: sessionSelector.pressed ? 0.95 : (sessionSelector.hovered ? 1.03 : 1.0)
+            Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
+
+            ShaderEffectSource {
+                id: sessionBlurSource
+                sourceItem: bg
+                anchors.fill: parent
+                sourceRect: Qt.rect(sessionSelector.x, sessionSelector.y, sessionSelector.width, sessionSelector.height)
+            }
+
+            GaussianBlur {
+                anchors.fill: parent
+                source: sessionBlurSource
+                radius: 40
+                samples: 80
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                radius: 12
+                color: sessionSelector.pressed ? Qt.rgba(0, 0, 0, 0.35) : (sessionSelector.hovered ? Qt.rgba(1, 1, 1, 0.15) : Qt.rgba(0, 0, 0, 0.2))
+                border.color: sessionSelector.hovered ? Qt.rgba(1, 1, 1, 0.9) : Qt.rgba(1, 1, 1, 0.6)
+                border.width: 2
+
+                Behavior on color { ColorAnimation { duration: 150 } }
+                Behavior on border.color { ColorAnimation { duration: 150 } }
+            }
+
             layer.enabled: true
             layer.effect: DropShadow {
                 transparentBorder: true
                 color: Qt.rgba(0, 0, 0, 0.3)
-                radius: 15
-                samples: 30
+                radius: 20
+                samples: 40
+                verticalOffset: 3
             }
         }
 
         popup: Popup {
+            id: sessionPopup
             y: sessionSelector.height + 8 
             width: sessionSelector.width
             implicitHeight: contentItem.implicitHeight + 10 
             padding: 5
 
-            background: Rectangle {
-                color: "#111111"
-                border.color: "#333333"
-                border.width: 2
-                radius: 10
+            background: Item {
+                ShaderEffectSource {
+                    id: popupBlurSource
+                    sourceItem: bg
+                    anchors.fill: parent
+                    sourceRect: Qt.rect(sessionSelector.x, sessionSelector.y + sessionSelector.height + 8, sessionSelector.width, sessionPopup.height)
+                }
+
+                GaussianBlur {
+                    anchors.fill: parent
+                    source: popupBlurSource
+                    radius: 40
+                    samples: 80
+                }
+
+                Rectangle {
+                    anchors.fill: parent
+                    radius: 12
+                    color: Qt.rgba(0, 0, 0, 0.25)
+                    border.color: Qt.rgba(1, 1, 1, 0.6)
+                    border.width: 2
+                }
+
                 layer.enabled: true
                 layer.effect: DropShadow {
                     transparentBorder: true
-                    color: Qt.rgba(0, 0, 0, 0.5)
+                    color: Qt.rgba(0, 0, 0, 0.4)
                     radius: 20
                     samples: 40
+                    verticalOffset: 4
                 }
             }
 
@@ -330,6 +388,7 @@ Item {
                     Text {
                         text: "Desktop Session"
                         color: Qt.rgba(1, 1, 1, 0.4) 
+                        font.family: root.mainFont
                         font.pixelSize: 12
                         font.bold: true
                         font.capitalization: Font.AllUppercase
@@ -353,17 +412,27 @@ Item {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 40
-        spacing: 20
+        spacing: 16
 
         component PowerButton: Button {
             id: pwrBtn
-            width: 120
-            height: 45
+            width: 50
+            height: 50
+            padding: 0
+            leftPadding: 0
+            rightPadding: 0
+            topPadding: 0
+            bottomPadding: 0
+            
+            ToolTip.delay: 300
+            ToolTip.timeout: 3000
             
             contentItem: Text { 
+                anchors.centerIn: parent
                 text: pwrBtn.text 
                 color: "white" 
-                font.bold: true 
+                font.family: root.iconFont
+                font.pixelSize: 20
                 horizontalAlignment: Text.AlignHCenter 
                 verticalAlignment: Text.AlignVCenter 
 
@@ -376,7 +445,7 @@ Item {
             }
             
             background: Item { 
-                scale: pwrBtn.pressed ? 0.95 : (pwrBtn.hovered ? 1.05 : 1.0)
+                scale: pwrBtn.pressed ? 0.93 : (pwrBtn.hovered ? 1.08 : 1.0)
                 Behavior on scale { NumberAnimation { duration: 150; easing.type: Easing.OutQuad } }
 
                 ShaderEffectSource {
@@ -395,7 +464,7 @@ Item {
 
                 Rectangle {
                     anchors.fill: parent
-                    radius: 12
+                    radius: 14
                     color: pwrBtn.pressed ? Qt.rgba(0, 0, 0, 0.35) : (pwrBtn.hovered ? Qt.rgba(1, 1, 1, 0.15) : Qt.rgba(0, 0, 0, 0.2))
                     border.color: pwrBtn.hovered ? Qt.rgba(1, 1, 1, 0.9) : Qt.rgba(1, 1, 1, 0.6)
                     border.width: 2
@@ -416,12 +485,30 @@ Item {
         }
 
         PowerButton {
-            text: "Restart"
+            text: "\uf0c0"
+            ToolTip.visible: hovered
+            ToolTip.text: "Switch User"
+            onClicked: {
+                if (typeof userModel !== "undefined" && userModel.count > 1) {
+                    var nextIdx = (userModel.lastIndex + 1) % userModel.count
+                    userModel.lastIndex = nextIdx
+                    var nextName = (userModel.nameAt ? userModel.nameAt(nextIdx) : userModel.get(nextIdx).name)
+                    usernameDisplay.text = nextName
+                }
+            }
+        }
+
+        PowerButton {
+            text: "\uf021"
+            ToolTip.visible: hovered
+            ToolTip.text: "Restart"
             onClicked: sddm.reboot()
         }
 
         PowerButton {
-            text: "Shutdown"
+            text: "\uf011"
+            ToolTip.visible: hovered
+            ToolTip.text: "Shutdown"
             onClicked: sddm.powerOff()
         }
     }
