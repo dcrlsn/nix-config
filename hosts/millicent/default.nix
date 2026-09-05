@@ -83,7 +83,7 @@
         LEFT='DVI-I-1-1'
         CENTER='DP-3'
         RIGHT='DVI-I-2-2'
-        ${lib.getBin pkgs.xorg.xrandr}/bin/xrandr --output $CENTER --rotate left --output $LEFT --rotate left --left-of $CENTER --output $RIGHT --right-of $CENTER
+        ${lib.getBin pkgs.xrandr}/bin/xrandr --output $CENTER --rotate left --output $LEFT --rotate left --left-of $CENTER --output $RIGHT --right-of $CENTER
       '';
     };
   };

@@ -22,6 +22,11 @@ lib.mkIf config.custom.core.enable {
     '';
   };
 
+  nixpkgs.flake = {
+    setFlakeRegistry = false;
+    setNixPath = false;
+  };
+
   system = {
     stateVersion = "25.11";
   };

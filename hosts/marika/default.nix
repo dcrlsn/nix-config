@@ -52,9 +52,6 @@
     theming.enable = true;
   };
 
-  nixpkgs.flake.setFlakeRegistry = false;
-  nixpkgs.flake.setNixPath = false;
-
   boot = {
     consoleLogLevel = 3;
     loader = {
