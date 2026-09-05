@@ -8,6 +8,140 @@
   ...
 }:
 
+let
+  rgb = themeColors.default.rgb;
+  tokyoNightColorScheme = pkgs.writeTextFile {
+    name = "tokyo-night-kde-color-scheme";
+    destination = "/share/color-schemes/TokyoNight.colors";
+    text = ''
+      [Colors:Window]
+      BackgroundNormal=${rgb.bg}
+      BackgroundAlternate=${rgb.bg_highlight or "41,46,66"}
+      ForegroundNormal=${rgb.fg}
+      ForegroundInactive=${rgb.gray or "86,95,137"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:View]
+      BackgroundNormal=${rgb.bg_dark or "22,22,30"}
+      BackgroundAlternate=${rgb.bg}
+      ForegroundNormal=${rgb.fg}
+      ForegroundInactive=${rgb.gray or "86,95,137"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:Button]
+      BackgroundNormal=${rgb.bg_highlight or "41,46,66"}
+      BackgroundAlternate=${rgb.inactive or "65,72,104"}
+      ForegroundNormal=${rgb.fg}
+      ForegroundInactive=${rgb.gray or "86,95,137"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:Selection]
+      BackgroundNormal=${rgb.blue}
+      BackgroundAlternate=${rgb.inactive or "65,72,104"}
+      ForegroundNormal=${rgb.black or "21,22,30"}
+      ForegroundInactive=${rgb.text or "169,177,214"}
+      ForegroundActive=${rgb.black or "21,22,30"}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:Tooltip]
+      BackgroundNormal=${rgb.bg_dark or "22,22,30"}
+      BackgroundAlternate=${rgb.bg_highlight or "41,46,66"}
+      ForegroundNormal=${rgb.fg}
+      ForegroundInactive=${rgb.gray or "86,95,137"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:Complementary]
+      BackgroundNormal=${rgb.bg_dark or "22,22,30"}
+      BackgroundAlternate=${rgb.bg}
+      ForegroundNormal=${rgb.fg}
+      ForegroundInactive=${rgb.gray or "86,95,137"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:Header]
+      BackgroundNormal=${rgb.bg}
+      BackgroundAlternate=${rgb.bg_highlight or "41,46,66"}
+      ForegroundNormal=${rgb.fg}
+      ForegroundInactive=${rgb.gray or "86,95,137"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [Colors:Header][Inactive]
+      BackgroundNormal=${rgb.bg_dark or "22,22,30"}
+      BackgroundAlternate=${rgb.bg}
+      ForegroundNormal=${rgb.gray or "86,95,137"}
+      ForegroundInactive=${rgb.inactive or "65,72,104"}
+      ForegroundActive=${rgb.blue}
+      ForegroundLink=${rgb.cyan}
+      ForegroundVisited=${rgb.purple}
+      ForegroundNegative=${rgb.red}
+      ForegroundNeutral=${rgb.yellow}
+      ForegroundPositive=${rgb.green}
+      DecorationFocus=${rgb.blue}
+      DecorationHover=${rgb.cyan}
+
+      [General]
+      ColorScheme=TokyoNight
+      Name=Tokyo Night
+      shadeSortColumn=true
+
+      [KDE]
+      contrast=4
+
+      [WM]
+      activeBackground=${rgb.bg}
+      activeForeground=${rgb.fg}
+      inactiveBackground=${rgb.bg_dark or "22,22,30"}
+      inactiveForeground=${rgb.gray or "86,95,137"}
+    '';
+  };
+in
 {
   options.custom.desktops.kde = {
     enable = lib.mkEnableOption "KDE Plasma 6 desktop environment";
@@ -41,6 +175,7 @@
         pkgs.kdePackages.packagekit-qt
         pkgs.xclip
         pkgs.xdg-utils
+        tokyoNightColorScheme
       ];
       plasma6.excludePackages = with pkgs.kdePackages; [
         elisa
@@ -56,10 +191,12 @@
           or inputs.plasma-manager.homeManagerModules.plasma-manager
         )
       ];
+      xdg.dataFile."color-schemes/TokyoNight.colors".source =
+        "${tokyoNightColorScheme}/share/color-schemes/TokyoNight.colors";
       programs.plasma = {
         enable = true;
         workspace = {
-          colorScheme = "BreezeDark";
+          colorScheme = "TokyoNight";
         };
         configFile = {
           "kdeglobals"."General"."AccentColor" = "${themeColors.default.rgb.blue}";

@@ -57,9 +57,9 @@ in
     ];
   };
 
-  millicent = lib.nixosSystem {
+  millicent = unstable-lib.nixosSystem {
     inherit system;
-    pkgs = pkgs;
+    pkgs = unstable;
     specialArgs = {
       inherit
         inputs
@@ -74,7 +74,7 @@ in
     modules = [
       ../modules
       ./millicent
-      home-manager.nixosModules.home-manager
+      home-manager-unstable.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
