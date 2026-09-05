@@ -20,7 +20,7 @@ let
         src = pkgs.fetchurl {
           name = "VSCode_latest_linux-x64.tar.gz";
           url = "https://update.code.visualstudio.com/latest/linux-x64/insider";
-          hash = "sha256-K+NV+050Jw5z/WnzdVnYW2lQHr4Neq6yQqJbnck9NAc=";
+          hash = "sha256-301r3yE0UqWuADoPKyygharcXwEGj7LMDrlI5I//qDM=";
         };
         buildInputs = oldAttrs.buildInputs;
       });
