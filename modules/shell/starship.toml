@@ -5,9 +5,9 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
-[](fg:color10 bg:color9)\
-[](fg:color9 bg:dark_bg)\
+[](fg:color10 bg:dark_bg)\
 $terraform\
+${custom.nix}\
 $nodejs\
 $rust\
 $python\
@@ -158,6 +158,14 @@ modified = "  ${count}"
 staged = "  ${count}"
 untracked = "  ${count}"
 format = '[($stashed$staged$modified$renamed$untracked$deleted$conflicted$ahead_behind )]($style)'
+
+[custom.nix]
+detect_extensions = ["nix"]
+detect_files = ["flake.nix", "flake.lock", "default.nix", "shell.nix"]
+symbol = ""
+style = "bg:dark_bg"
+command = "nix --version | awk '{print \"v\" $NF}'"
+format = '[[ $symbol ($output) ](fg:color2 bg:dark_bg)]($style)'
 
 [nodejs]
 symbol = ""
