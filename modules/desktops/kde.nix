@@ -38,6 +38,12 @@
       systemPackages = with pkgs.kdePackages; [
         packagekit-qt
       ];
+      plasma6.excludePackages = with pkgs.kdePackages; [
+        elisa
+        kate
+        konsole
+        plasma-workspace-wallpapers
+      ];
     };
 
     home-manager.users.${vars.user} = {

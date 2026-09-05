@@ -24,7 +24,6 @@ lib.mkIf config.custom.core.enable {
       gvfs
       killall
       lshw
-      nano
       nix-tree
       pciutils
       tldr
