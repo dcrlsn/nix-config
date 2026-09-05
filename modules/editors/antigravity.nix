@@ -9,7 +9,7 @@
 
 let
   cfg = config.custom.editors.antigravity;
-  antigravityPkgs = inputs.antigravity-nix.packages.${pkgs.system};
+  antigravityPkgs = inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system};
   baseAppPkg =
     if cfg.useFHS then
       antigravityPkgs.google-antigravity
@@ -63,6 +63,9 @@ in
         ".config/Antigravity IDE/User/settings.json" = {
           text = builtins.toJSON {
             "workbench.colorTheme" = "Tokyo Night";
+            "editor.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
+            "editor.fontLigatures" = true;
+            "terminal.integrated.fontFamily" = "'FiraCode Nerd Font', 'Fira Code', monospace";
           };
           force = true;
         };

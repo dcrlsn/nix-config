@@ -30,6 +30,12 @@
       bambu-studio.enable = true;
       copilot.enable = true;
       discord.enable = true;
+      firefox.enable = true;
+      google-chrome.enable = true;
+      vlc.enable = true;
+      libreoffice.enable = true;
+      slack.enable = true;
+      teams.enable = true;
     };
     shell = {
       zsh.enable = true;
@@ -37,6 +43,9 @@
       git.enable = true;
       starship.enable = true;
       direnv.enable = true;
+      distrobox.enable = true;
+      fastfetch.enable = true;
+      nixfmt.enable = true;
     };
     theming.enable = true;
   };
@@ -78,4 +87,6 @@
       '';
     };
   };
+
+  hardware.bluetooth.enable = true;
 }

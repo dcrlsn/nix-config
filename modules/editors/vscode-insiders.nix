@@ -57,7 +57,10 @@ in
                 if [ ! -f "$SETTINGS_FILE" ]; then
                   $DRY_RUN_CMD cat << 'EOF' > "$SETTINGS_FILE"
         {
-          "workbench.colorTheme": "Tokyo Night"
+          "workbench.colorTheme": "Tokyo Night",
+          "editor.fontFamily": "'FiraCode Nerd Font', 'Fira Code', monospace",
+          "editor.fontLigatures": true,
+          "terminal.integrated.fontFamily": "'FiraCode Nerd Font', 'Fira Code', monospace"
         }
         EOF
                   $DRY_RUN_CMD chmod 644 "$SETTINGS_FILE"
