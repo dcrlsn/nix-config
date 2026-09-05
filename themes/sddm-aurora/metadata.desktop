@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Encoding=UTF-8
+Name=SDDM-Aurora
+Description=Aurora Liquid Glass Theme
+Theme-Id=sddm-aurora
+Type=sddm-theme
+Screenshot=preview.jpeg
+MainScript=Main.qml
+QtVersion=6

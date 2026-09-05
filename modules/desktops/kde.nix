@@ -141,6 +141,20 @@ let
       inactiveForeground=${rgb.gray or "86,95,137"}
     '';
   };
+
+  sddmAurora = pkgs.stdenv.mkDerivation {
+    pname = "sddm-aurora";
+    version = "1.0.0";
+    src = ../../themes/sddm-aurora;
+    dontBuild = true;
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/sddm-aurora
+      cp -r Main.qml metadata.desktop assets $out/share/sddm/themes/sddm-aurora/
+      if [ -f preview.jpeg ]; then
+        cp preview.jpeg $out/share/sddm/themes/sddm-aurora/
+      fi
+    '';
+  };
 in
 {
   options.custom.desktops.kde = {
@@ -165,7 +179,15 @@ in
       };
       desktopManager.plasma6.enable = true;
       displayManager = {
-        sddm.wayland.enable = true;
+        sddm = {
+          enable = true;
+          wayland.enable = true;
+          theme = "sddm-aurora";
+          extraPackages = with pkgs.kdePackages; [
+            qt5compat
+            qtsvg
+          ];
+        };
         defaultSession = "plasma";
       };
     };
@@ -176,6 +198,7 @@ in
         pkgs.xclip
         pkgs.xdg-utils
         tokyoNightColorScheme
+        sddmAurora
       ];
       plasma6.excludePackages = with pkgs.kdePackages; [
         elisa
